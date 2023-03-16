@@ -57,13 +57,11 @@ class HapiClient {
     /**
      * Queries the HAPI server's catalog and returns an array of Datasets
      *
-     * @return Dataset[]
+     * @return array Array of datasets
      */
     public function catalog(): array
     {
         $response = $this->hapi_http_get($this->server . "/catalog");
-        return array_map(function (array $dataset_info) {
-            return Dataset::fromArray($dataset_info);
-        }, $response["catalog"]);
+        return $response['catalog'];
     }
 }

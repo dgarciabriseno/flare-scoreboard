@@ -2,7 +2,6 @@
 
 use PHPUnit\Framework\TestCase;
 use FlareScoreboard\Http;
-use Exception;
 
 final class HttpTest extends TestCase
 {

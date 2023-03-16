@@ -2,7 +2,6 @@
 
 use PHPUnit\Framework\TestCase;
 use FlareScoreboard\Json;
-use Exception;
 
 final class JsonTest extends TestCase
 {
@@ -26,5 +25,6 @@ final class JsonTest extends TestCase
 
     public function testBadEncode(): void {
         // TODO: Not sure how to make a bad json object
+        $this->markTestSkipped('Unimplemented test');
     }
 }
