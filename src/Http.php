@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace FlareScoreboard;
-use FlareScoreboard\Exceptions\HttpException;
+use Exception;
 
 /**
  * Provides helper methods for HTTP requests
@@ -24,7 +24,7 @@ class Http
         curl_close($ch);
 
         if ($response_code != 200) {
-            throw new HttpException("Request failed", $response);
+            throw new Exception("Request failed for $url\nResponse: $response");
         }
         return $response;
     }
