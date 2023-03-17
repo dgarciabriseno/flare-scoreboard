@@ -2,10 +2,9 @@
 
 namespace FlareScoreboard;
 
-use DateTime;
 use FlareScoreboard\Http;
-use FlareScoreboard\Models\Dataset;
-use Exception;
+use \Exception;
+use \DateTime;
 
 /**
  * Interface for getting information from a HAPI server
