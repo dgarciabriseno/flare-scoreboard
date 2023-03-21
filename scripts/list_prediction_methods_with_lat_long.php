@@ -12,12 +12,12 @@ foreach ($catalog['catalog'] as $predictor) {
         $info = $server->info($id);
         $parameters = $info['parameters'];
         $noaaParameters = array_filter($parameters, function ($parameter) {
-            return str_contains($parameter['name'], "NOAARegionId");
+            return str_contains($parameter['name'], "NOAALatitude") || str_contains($parameter['name'], "CataniaLatitude") || str_contains($parameter['name'], "ModelLatitude");
         });
         if (count($noaaParameters) > 0) {
             echo "$id\n";
         } else {
-            echo "NOAARegionId not found in $id\n";
+            echo "Lat/Long not found in $id\n";
         }
     }
 }
