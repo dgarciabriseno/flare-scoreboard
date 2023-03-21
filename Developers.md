@@ -4,11 +4,22 @@ This document describes how the flare scoreboard is implemented so new developer
 ## Components
 The following components exist in this library:
 
+### Scoreboard
+Location: `src/Scoreboard.php`
+
+Description: Main public API for getting scoreboard data. Uses the HapiClient and Cache to retrieve and cache data.
+
 ### HapiClient
 Location: `src/HapiClient.php`
 
 Description: This is the interface for communicating with any HAPI Server.
 Its functions map to HAPI endpoints (catalog, info, data, etc).
+
+### Cache
+Location: `src/Cache.php`
+
+Description: Scoreboard uses this to cache data returned from the hapi server.
+Data is cached to system tmp dir.
 
 ### Http Client
 Location: `src/Http.php`

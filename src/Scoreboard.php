@@ -10,7 +10,7 @@ use \Exception;
 class Scoreboard
 {
     const DATE_FORMAT = 'Y-m-d\TG:i:s';
-    const MAX_CACHE_AGE = 86400;
+    const MAX_CACHE_AGE = 2592000; // 30 days in seconds
 
     /**
      * HAPI server interface
