@@ -47,7 +47,7 @@ class Scoreboard
     /**
      * Get the list of predictions for the given method over the given time range
      */
-    public function getPredictions(string $predictionMethod, DateTime $start, DateTime $stop): array
+    public function getPredictions(string $predictionMethod, DateTime $start, DateTime $stop): HapiIterator
     {
         // Make sure the given prediction method is valid
         $this->validatePredictionMethod($predictionMethod);
@@ -63,7 +63,7 @@ class Scoreboard
             // Cache the new data.
             Cache::set($cache_key, $predictions);
         }
-        return $predictions;
+        return new HapiIterator($predictions);
     }
 
     /**
