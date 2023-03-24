@@ -2,21 +2,23 @@
 
 namespace FlareScoreboard;
 
-use ArrayAccess;
-use Exception;
+use \ArrayAccess;
+use \JsonSerializable;
 
 /**
  * Wrapper to allow array access to a HAPI record using parameter names instead of indices
  */
-class HapiRecord implements ArrayAccess
+class HapiRecord implements ArrayAccess, JsonSerializable
 {
     private array $record;
     private array $parameters;
+    private string $method;
 
-    public function __construct(array &$record, array &$parameters)
+    public function __construct(array &$record, array &$parameters, string &$method)
     {
         $this->record = &$record;
         $this->parameters = &$parameters;
+        $this->method = $method;
     }
 
     /**
@@ -62,5 +64,15 @@ class HapiRecord implements ArrayAccess
     public function offsetUnset(mixed $offset): void
     {
         throw new \Exception("HapiRecord is read-only");
+    }
+
+    public function jsonSerialize(): array
+    {
+        $result = [];
+        foreach ($this->parameters as $parameter) {
+            $result[$parameter['name']] = $this->get($parameter['name']);
+        }
+        $result['method'] = $this->method;
+        return $result;
     }
 }

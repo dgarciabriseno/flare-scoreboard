@@ -10,11 +10,13 @@ class HapiIterator implements \Countable, \Iterator, \ArrayAccess
 {
     private array $data;
     private int $position;
+    private string $method;
 
-    public function __construct(array &$data)
+    public function __construct(array &$data, string &$method)
     {
         $this->data = &$data;
         $this->position = 0;
+        $this->method = $method;
     }
 
     /**
@@ -32,7 +34,7 @@ class HapiIterator implements \Countable, \Iterator, \ArrayAccess
 
     public function current(): HapiRecord
     {
-        return new HapiRecord($this->data['data'][$this->position], $this->data['parameters']);
+        return new HapiRecord($this->data['data'][$this->position], $this->data['parameters'], $this->method);
     }
 
     public function key(): mixed
@@ -62,7 +64,7 @@ class HapiIterator implements \Countable, \Iterator, \ArrayAccess
 
     public function offsetGet(mixed $offset): HapiRecord
     {
-        return new HapiRecord($this->data['data'][$offset], $this->data['parameters']);
+        return new HapiRecord($this->data['data'][$offset], $this->data['parameters'], $this->method);
     }
 
     public function offsetSet(mixed $offset, mixed $value): void

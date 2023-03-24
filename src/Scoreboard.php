@@ -63,7 +63,7 @@ class Scoreboard
             // Cache the new data.
             Cache::set($cache_key, $predictions);
         }
-        return new HapiIterator($predictions);
+        return new HapiIterator($predictions, $predictionMethod);
     }
 
     /**
