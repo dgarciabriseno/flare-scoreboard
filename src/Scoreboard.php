@@ -51,18 +51,8 @@ class Scoreboard
     {
         // Make sure the given prediction method is valid
         $this->validatePredictionMethod($predictionMethod);
-
-        // Attempt to load the data from cache before performing a request
-        $cache_key = self::getPredictionCacheKey($predictionMethod, $start, $stop);
-        $predictions = Cache::get($cache_key, self::MAX_CACHE_AGE);
-
-        // If the data was not in the cache, request it from the hapi server.
-        if (!$predictions) {
-            $response = $this->hapiClient->data($predictionMethod, $start, $stop, null);
-            $predictions = $response;
-            // Cache the new data.
-            Cache::set($cache_key, $predictions);
-        }
+        $response = $this->hapiClient->data($predictionMethod, $start, $stop, null);
+        $predictions = $response;
         return new HapiIterator($predictions, $predictionMethod);
     }
 
